@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google" content="notranslate">
+  <title>料金表 | にじのはしSC熊本分院</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-main:  #4A8FD4;
+      --blue-light: #C8E2F5;
+      --blue-pale:  #EAF4FC;
+      --blue-dark:  #2E6FAD;
+      --bg:         #F4F8FB;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 0 0 16px;
+    }
+
+    /* ── ヘッダー ── */
+    header {
+      background: linear-gradient(160deg, #B8DDEF 0%, #D8EEFA 50%, #EAF4FC 100%);
+      padding: 16px 20px 18px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      border: 28px solid rgba(74,143,212,0.10);
+      top: -50px; right: -40px;
+      pointer-events: none;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 20px solid rgba(74,143,212,0.07);
+      top: -20px; right: -5px;
+      pointer-events: none;
+    }
+    .header-inner { position: relative; z-index: 1; }
+    .header-clinic {
+      font-size: 11px;
+      color: #5A8AB0;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+    .header-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--blue-dark);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── セクション ── */
+    .section {
+      margin: 10px 8px 0;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(74,143,212,0.13);
+    }
+    .section-head {
+      background: linear-gradient(135deg, #3A82C8 0%, #5AA0DC 100%);
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 9px 16px;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-head-sub {
+      font-size: 9px;
+      font-weight: normal;
+      opacity: 0.80;
+      letter-spacing: 0;
+      background: rgba(255,255,255,0.18);
+      padding: 1px 7px;
+      border-radius: 10px;
+    }
+
+    /* ── 料金行 ── */
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px 12px 18px;
+      border-bottom: 1px solid #EEF5FB;
+      gap: 10px;
+      position: relative;
+    }
+    .price-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 25%; bottom: 25%;
+      width: 3px;
+      background: linear-gradient(180deg, var(--blue-main), var(--blue-light));
+      border-radius: 0 2px 2px 0;
+    }
+    .price-row:last-child { border-bottom: none; }
+
+    /* 妊娠時サブ行 */
+    .price-row.sub {
+      background: #F7FBFF;
+      padding: 9px 16px 9px 24px;
+    }
+    .price-row.sub::before {
+      background: linear-gradient(180deg, #A8CCE8, #C8E2F5);
+    }
+    .price-row.sub:last-child { border-bottom: none; }
+
+    .price-info { flex: 1; }
+
+    /* 手術名 + 耳カットタグを横並び */
+    .price-name-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+    .price-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #222;
+      line-height: 1.4;
+      letter-spacing: 0.01em;
+    }
+    .price-name.sub {
+      font-size: 12px;
+      color: #4A6A88;
+      font-weight: 500;
+    }
+    .ear-tag {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: normal;
+      padding: 1px 7px;
+      border-radius: 20px;
+      border: 1px solid #C8C8C8;
+      color: #999;
+      background: #F7F7F7;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+
+    /* ノミダニ等インライン小文字 */
+    .price-sub-inline {
+      font-size: 9px;
+      color: #999;
+      font-weight: normal;
+      white-space: nowrap;
+    }
+
+    .price-note {
+      font-size: 9.5px;
+      color: #9AAABB;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+    .price-amount {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--blue-dark);
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+    }
+    .price-amount.sub {
+      font-size: 14px;
+      color: #5A88BB;
+    }
+
+    /* 妊娠時サブヘッダー */
+    .sub-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 10.5px;
+      font-weight: bold;
+      color: #4A7899;
+      border-top: 1px dashed #C0D8EC;
+      background: linear-gradient(90deg, #EBF5FF 0%, #F7FBFF 100%);
+      letter-spacing: 0.05em;
+    }
+    .sub-head::before {
+      content: '＋';
+      display: block;
+      font-size: 10px;
+      color: var(--blue-main);
+      font-weight: bold;
+    }
+
+    /* ── 注意書き ── */
+    .caution {
+      margin: 10px 8px 0;
+      padding: 10px 14px;
+      background: #F5F5F5;
+      border-radius: 8px;
+      font-size: 11.5px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    /* ── フッター ── */
+    footer {
+      text-align: center;
+      padding: 8px 16px 4px;
+      font-size: 9px;
+      color: #A0BAD0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-inner">
+      <div class="header-clinic">にじのはしスペイクリニック 熊本分院</div>
+      <div class="header-title">料金表（税込）</div>
+    </div>
+  </header>
+
+  <!-- 手術 -->
+  <div class="section">
+    <div class="section-head">🐱 手術<span class="section-head-sub">ノミダニ駆虫薬・抗生物質含む</span></div>
+
+    <div class="price-row">
+      <div class="price-info">
+        <div class="price-name">TNR猫不妊手術（メス）</div>
+        <span class="ear-tag ear-required">耳カット必須</span>
+      </div>
+      <div class="price-amount">¥10,000</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price-info">
+        <div class="price-name">TNR猫去勢手術（オス）</div>
+        <span class="ear-tag ear-required">耳カット必須</span>
+      </div>
+      <div class="price-amount">¥6,000</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price-info">
+        <div class="price-name">飼い猫不妊手術（メス）</div>
+        <span class="ear-tag ear-optional">耳カット任意</span>
+      </div>
+      <div class="price-amount">¥13,000</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price-info">
+        <div class="price-name">飼い猫去勢手術（オス）</div>
+        <span class="ear-tag ear-optional">耳カット任意</span>
+      </div>
+      <div class="price-amount">¥8,000</div>
+    </div>
+
+    <!-- 妊娠していた場合 -->
+    <div class="sub-head">妊娠していた場合（追加料金）</div>
+
+    <div class="price-row sub">
+      <div class="price-info">
+        <span class="price-name sub">堕胎処置（初期・中期）</span>
+      </div>
+      <div class="price-amount sub">¥1,000</div>
+    </div>
+
+    <div class="price-row sub">
+      <div class="price-info">
+        <span class="price-name sub">堕胎処置（後期）</span>
+      </div>
+      <div class="price-amount sub">¥2,000</div>
+    </div>
+  </div>
+
+  <!-- 診療オプション -->
+  <div class="section">
+    <div class="section-head">＋ 診療オプション</div>
+
+    <div class="price-row">
+      <div class="price-info"><div class="price-name">ウイルス検査（FeLV/FIV）</div></div>
+      <div class="price-amount">¥3,000</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price-info"><div class="price-name">ワクチン接種（3種混合）</div></div>
+      <div class="price-amount">¥3,000</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price-info">
+        <div class="price-name">マイクロチップ装着</div>
+      </div>
+      <div class="price-amount">¥3,000</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price-info">
+        <div class="price-name">長期作用型抗生物質</div>
+        <div class="price-note">体重1kgあたり</div>
+      </div>
+      <div class="price-amount">¥500</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price-info"><div class="price-name">爪切り</div></div>
+      <div class="price-amount">¥500</div>
+    </div>
+  </div>
+
+  <div class="caution">
+    ※出張手術の場合は、別途出張交通費が必要となります。
+  </div>
+
+  <footer>© にじのはしスペイクリニック熊本分院</footer>
+
+</div>
+</body>
+</html>
