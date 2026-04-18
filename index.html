@@ -34,7 +34,7 @@
     /* ── ヘッダー ── */
     header {
       background: linear-gradient(160deg, #B8DDEF 0%, #D8EEFA 50%, #EAF4FC 100%);
-      padding: 16px 20px 18px;
+      padding: 22px 20px 22px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -42,20 +42,11 @@
     header::before {
       content: '';
       position: absolute;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      border: 28px solid rgba(74,143,212,0.10);
-      top: -50px; right: -40px;
+      inset: 0;
+      background: url('header-bg.jpg') no-repeat right center / auto 160%;
+      mix-blend-mode: multiply;
       pointer-events: none;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      border: 20px solid rgba(74,143,212,0.07);
-      top: -20px; right: -5px;
-      pointer-events: none;
+      z-index: 0;
     }
     .header-inner { position: relative; z-index: 1; }
     .header-clinic {
